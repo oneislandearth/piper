@@ -1,6 +1,6 @@
 [Unit]
 Description=ngrok
-ConditionFileIsExecutable=/home/$username/ngrok
+ConditionFileIsExecutable=/home/$username/ngrok/ngrok
 After=network.target
 
 [Service]
