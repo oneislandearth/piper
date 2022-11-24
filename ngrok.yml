@@ -1,0 +1,10 @@
+version: "2"
+authtoken: $token
+region: au
+tunnels:
+  website:
+    addr: 80
+    inspect: false
+    proto: http
+    host_header: rewrite
+    subdomain: $domain
