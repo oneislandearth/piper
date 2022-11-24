@@ -54,26 +54,32 @@ function ngrok() {
     mkdir ~/ngrok
 
     # Download and install ngrok
-    curl -sk https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-arm.tgz | tar xvz -C ~/ngrok/
+    curl -sk https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-arm.tgz | tar xvz -C ~/ngrok/ > 
+
+    # Success alert message
+    alert "  ✔ ngrok-executable" "green"
 
     # Download and configure the ngrok config file
     curl -qks \
-    "https://raw.githubusercontent.com/oneislandearth/piper/main/ngrok.yml?token=GHSAT0AAAAAABYHH5RFUYJALIZEMRBFX3WEY37OJDA" \
+    "https://raw.githubusercontent.com/oneislandearth/piper/main/ngrok.yml" \
     | sed "s/\$token/${token}/igm" \
     | sed "s/\$domain/${subdomain}/igm" \
     > ~/ngrok/ngrok.yml
 
+    # Success alert message
+    alert "  ✔ ngrok-config" "green"
+
     # Download and configure the ngrok service file
     curl -qks \
-    "https://raw.githubusercontent.com/oneislandearth/piper/main/ngrok.service?token=GHSAT0AAAAAABYHH5RFAFJS7AFNBPYVPOCGY37OJXA" \
+    "https://raw.githubusercontent.com/oneislandearth/piper/main/ngrok.service" \
     | sed "s/\$username/$(whoami)/igm" \
     > ~/ngrok/ngrok.service
 
+    # Success alert message
+    alert "  ✔ ngrok-service" "green"
+
     # Start the ngrok system service
     systemctl --user --now enable ~/ngrok/ngrok.service
-
-    # Success alert message
-    alert "> Server is deployed to ${subdomain}.au.ngrok.io" "green"
   fi
 }
 
