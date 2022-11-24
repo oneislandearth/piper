@@ -2,7 +2,7 @@
 
 # Define the arguments
 token=$1
-subdomain$2
+subdomain=$2
 
 # Define an alert message
 function alert() {
