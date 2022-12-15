@@ -90,6 +90,22 @@ function ngrok() {
     # Check status
     grep -oh "\w*th\w*" *
 
+  # Handle already installed
+  else
+
+    # Download and configure the ngrok config file
+    curl -qks \
+    "https://raw.githubusercontent.com/oneislandearth/piper/main/ngrok.yml" \
+    | sed "s/\$token/${token}/igm" \
+    | sed "s/\$domain/${subdomain}/igm" \
+    > ~/ngrok/ngrok.yml
+
+    # Success alert message
+    alert "  ✔ ngrok-config updated" "green"
+
+    # Start the ngrok system service
+    systemctl --user --now enable ~/ngrok/ngrok.service > /dev/null 2>&1
+
   fi
 
   # Final success
