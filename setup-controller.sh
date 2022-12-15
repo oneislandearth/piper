@@ -60,7 +60,7 @@ function ngrok() {
     curl -# -k https://raw.githubusercontent.com/oneislandearth/piper/main/ngrok-v3-stable-linux-arm.tgz | tar xvz -C ~/ngrok/ > /dev/null 2>&1
 
     # Success alert message
-    alert "    ✔ ngrok-executable" "green"
+    alert "\r\033[K    ✔ ngrok-executable" "green"
 
     # Download and configure the ngrok config file
     curl -qks \
