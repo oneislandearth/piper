@@ -50,14 +50,17 @@ function ngrok() {
   # Check whether ngrok exists or not
   if [ ! -d ~/ngrok ]; then
 
+    # Creating ngrok
+    alert "  » Setting up ngrok..."
+
     # Make the ngrok directory
     mkdir ~/ngrok
 
     # Download and install ngrok
-    curl -qsk "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-arm.tgz" | tar xvz -C ~/ngrok/ > /dev/null 2>&1
+    curl -sk https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-arm.tgz | tar xvz -C ~/ngrok/ > 
 
     # Success alert message
-    alert "  ✔ ngrok-executable" "green"
+    alert "    ✔ ngrok-executable" "green"
 
     # Download and configure the ngrok config file
     curl -qks \
@@ -67,7 +70,7 @@ function ngrok() {
     > ~/ngrok/ngrok.yml
 
     # Success alert message
-    alert "  ✔ ngrok-config" "green"
+    alert "    ✔ ngrok-config" "green"
 
     # Download and configure the ngrok service file
     curl -qks \
@@ -76,14 +79,22 @@ function ngrok() {
     > ~/ngrok/ngrok.service
 
     # Success alert message
-    alert "  ✔ ngrok-service" "green"
+    alert "    ✔ ngrok-service" "green"
 
     # Start the ngrok system service
-    systemctl --user --now enable ~/ngrok/ngrok.service
-  fi
-}
+    systemctl --user --now enable ~/ngrok/ngrok.service > /dev/null 2>&1
 
-echo "hi"
+    # Sleep 3 seconds
+    sleep 3
+
+    # Check status
+    grep -oh "\w*th\w*" *
+
+  fi
+
+  # Final success
+   alert "✔ All dependencies installed correctly" "green"
+}
 
 # Install and configure ngrok
 ngrok $token $subdomain
