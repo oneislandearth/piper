@@ -57,7 +57,7 @@ function ngrok() {
     mkdir ~/ngrok
 
     # Download and install ngrok
-    curl -qsk https://github.com/oneislandearth/piper/raw/main/ngrok-v3-stable-linux-arm.tgz | tar xvz -C ~/ngrok/ >
+    curl -# -k https://raw.githubusercontent.com/oneislandearth/piper/main/ngrok-v3-stable-linux-arm.tgz | tar xvz -C ~/ngrok/ > /dev/null 2>&1
 
     # Success alert message
     alert "    ✔ ngrok-executable" "green"
