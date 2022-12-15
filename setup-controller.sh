@@ -83,5 +83,7 @@ function ngrok() {
   fi
 }
 
+echo "hi"
+
 # Install and configure ngrok
 ngrok $token $subdomain
